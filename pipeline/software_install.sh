@@ -13,9 +13,9 @@ apt-get -y update && apt-get -y install git make gcc g++ bc zlib1g-dev python-pi
 
 # Install Tallymer
 cd /usr/local/src
-wget http://genometools.org/pub/genometools-1.5.1.tar.gz
-tar zxvf genometools-1.5.1.tar.gz
-cd genometools-1.5.1/
+wget http://genometools.org/pub/genometools-1.5.9.tar.gz
+tar zxvf genometools-1.5.9.tar.gz
+cd genometools-1.5.9/
 make 64bit=yes curses=no cairo=no
 make 64bit=yes curses=no cairo=no install
 
@@ -56,35 +56,44 @@ mv ./BFCounter /usr/local/bin/
 
 # Install Turtle
 cd /usr/local/src
-wget http://bioinformatics.rutgers.edu/Static/Software/Turtle/Turtle-0.3.tar.gz
-tar zxvf Turtle-0.3.tar.gz
+#ORIGINAL: wget http://bioinformatics.rutgers.edu/Static/Software/Turtle/Turtle-0.3.tar.gz
+wget http://bioinformatics.rutgers.edu/Static/Software/Turtle/Turtle-0.3.1.tar.gz
+#ORIGINAL: tar zxvf Turtle-0.3.tar.gz
+tar zxvf Turtle-0.3.1.tar.gz
 cd Turtle-0.3/
 make
 mv *Turtle32 *Turtle64 /usr/local/bin/
 
 # Install KAnalyze
 cd /usr/local/src
-wget http://downloads.sourceforge.net/project/kanalyze/v0.9.3/kanalyze-0.9.3-linux.tar.gz
+#ORIGINAL: wget http://downloads.sourceforge.net/project/kanalyze/v0.9.3/kanalyze-0.9.3-linux.tar.gz
+wget https://sourceforge.net/projects/kanalyze/files/v0.9.3/kanalyze-0.9.3-linux.tar.gz
 tar zxvf kanalyze-0.9.3-linux.tar.gz
-
 
 # Install QUAST
 cd /usr/local/src
-wget http://downloads.sourceforge.net/project/quast/quast-2.3.tar.gz
+#ORIGINAL: wget http://downloads.sourceforge.net/project/quast/quast-2.3.tar.gz
+wget https://sourceforge.net/projects/quast/files/quast-2.3.tar.gz
 tar zxvf quast-2.3.tar.gz
 
-# Install FASTX-toolkit
-cd /usr/local/src
-curl -O http://hannonlab.cshl.edu/fastx_toolkit/libgtextutils-0.6.1.tar.bz2
-tar xjf libgtextutils-0.6.1.tar.bz2
-cd libgtextutils-0.6.1/
-./configure && make && make install
 
-cd /usr/local/src
-curl -O http://hannonlab.cshl.edu/fastx_toolkit/fastx_toolkit-0.0.13.2.tar.bz2
-tar xjf fastx_toolkit-0.0.13.2.tar.bz2
-cd fastx_toolkit-0.0.13.2/
-./configure && make && make install
+
+# Install FASTX-toolkit
+#ORIGINAL:
+#cd /usr/local/src
+#curl -O http://hannonlab.cshl.edu/fastx_toolkit/libgtextutils-0.6.1.tar.bz2
+#tar xjf libgtextutils-0.6.1.tar.bz2
+#cd libgtextutils-0.6.1/
+#./configure && make && make install
+
+#cd /usr/local/src
+#curl -O http://hannonlab.cshl.edu/fastx_toolkit/fastx_toolkit-0.0.13.2.tar.bz2
+#tar xjf fastx_toolkit-0.0.13.2.tar.bz2
+#cd fastx_toolkit-0.0.13.2/
+#./configure && make && make install
+
+#NEW
+sudo apt-get install fastx-toolkit
 
 # Install Trimmomatic #
 cd /usr/local/src
@@ -103,8 +112,10 @@ cp seqtk /usr/local/bin
 
 # install Java
 cd /usr/local/src
-wget http://uni-smr.ac.ru/archive/dev/java/JRE/7/JRE-7.51/jre-7u51-linux-x64.tar.gz 
-tar zxvf jre-7u51-linux-x64.tar.gz 
+#ORIGINAL: wget http://uni-smr.ac.ru/archive/dev/java/JRE/7/JRE-7.51/jre-7u51-linux-x64.tar.gz 
+#NEW:
+sudo apt-get install default-jre
+#tar zxvf jre-7u51-linux-x64.tar.gz 
 
 
 # Install ipython
@@ -127,22 +138,30 @@ python setup.py install
 cd /usr/local/src
 pip install pandas
 pip install --upgrade patsy
-apt-get install libfreetype6-dev
+#NEW:
+pip install scipy
+pip install numpy
 apt-get install libpng-dev
-pip install matplotlib
+#ORIGINAL: apt-get install libfreetype6-dev
+#ORIGINAL: pip install matplotlib
+#NEW
+sudo apt-get install pkg-config
+sudo apt-get install libblas-dev liblapack-dev
+
 pip install seaborn
 pip install --upgrade six
 pip install --upgrade statsmodels
-pip install --upgrade tornado
 
+#ORIGINAL: pip install --upgrade tornado
+sudo pip install "Tornado>=4.0.0,<5.0.0"
 
 # Upgrade the latex install with a few recommended packages
 apt-get -y install texlive-latex-recommended
 
-cd /usr/local/src
 # Install Velvet
-curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
-tar xvzf velvet_1.2.10.tgz
+#add an 's' to http
+wget https://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.10.tgz
+tar -xvzf velvet_1.2.10.tgz
 cd velvet_1.2.10/
 make 'MAXKMERLENGTH=49'
 cp velveth /usr/bin
