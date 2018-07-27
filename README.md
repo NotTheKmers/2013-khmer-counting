@@ -1,4 +1,4 @@
-- [<font color='red'> Running the khmer paper script pipeline </font>](#-font-color--red---running-the-khmer-paper-script-pipeline---font-)
+# [<font color='red'> Running the khmer paper script pipeline </font>](#-font-color--red---running-the-khmer-paper-script-pipeline---font-)
       - [2018-07-26](#2018-07-26)
   * [1. Origin pipeline (AWS)](#1-origin-pipeline--aws-)
     + [1.1 First, start up an EC2 instance using starcluster](#11-first--start-up-an-ec2-instance-using-starcluster)
